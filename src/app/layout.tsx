@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     other: {
       "naver-site-verification": "fcfee74366a02e63eea409edcc3dd7cce915673b",
     },
-  };
+  },
 };
 
 export default function RootLayout({
