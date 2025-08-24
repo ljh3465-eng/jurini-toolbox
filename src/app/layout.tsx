@@ -1,6 +1,8 @@
 // src/app/layout.tsx
 
 import type { Metadata } from "next";
+// ↓↓↓ 1. next/script에서 Script를 import 합니다. ↓↓↓
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -22,22 +24,16 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
-        {/* ↓↓↓ 이 부분을 애드센스 코드 스니펫으로 교체합니다. ↓↓↓ */}
-        <script
+        {/* ↓↓↓ 2. head 태그 안에 애드센스 코드를 Next.js Script 컴포넌트로 넣습니다. ↓↓↓ */}
+        <Script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8531773061576363"
           crossOrigin="anonymous"
-        ></script>
+          strategy="afterInteractive"
+        />
         {/* ↑↑↑ 여기까지 수정하세요! ↑↑↑ */}
       </head>
       <body>{children}</body>
     </html>
   );
 }
-```
-
-### **다음 단계**
-
-1.  **`ca-pub-xxxxxxxxxxxxxxxx`** 부분을 **본인의 애드센스 게시자 ID가 포함된 전체 `src` 주소**로 정확하게 교체해주세요.
-2.  수정한 코드를 `git push`하여 Vercel에 배포합니다.
-3.  배포가 완료된 후 **최소 1시간 이상** 기다렸다가, 애드센스 사이트에서 다시 확인 버튼을 누르면 됩
