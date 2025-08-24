@@ -1,13 +1,12 @@
 'use client';
 
-// 컴포넌트가 받아올 props의 타입을 정의합니다.
 interface NavbarProps {
+    // isDropdown 파라미터를 제거했습니다.
+    showPage: (pageId: string) => void;
     activePage: string;
-    showPage: (pageId: string, isDropdown?: boolean) => void;
 }
 
 export default function Navbar({ activePage, showPage }: NavbarProps) {
-    // 드롭다운 메뉴 항목들을 배열로 관리합니다.
     const dropdownItems = [
         { id: 'dividend-calculator', name: '배당금 계산기' },
         { id: 'dictionary', name: '주식 용어 사전' },
@@ -25,7 +24,7 @@ export default function Navbar({ activePage, showPage }: NavbarProps) {
                     <button className={`nav-button dropdown-btn ${dropdownItems.some(item => item.id === activePage) ? 'active' : ''}`}>더보기 ▼</button>
                     <div className="dropdown-content">
                         {dropdownItems.map(item => (
-                            <button key={item.id} onClick={() => showPage(item.id, true)}>{item.name}</button>
+                            <button key={item.id} onClick={() => showPage(item.id)}>{item.name}</button>
                         ))}
                     </div>
                 </div>

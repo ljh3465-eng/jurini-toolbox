@@ -16,10 +16,9 @@ import Contact from '../components/Contact';
 export default function Home() {
   const [activePage, setActivePage] = useState('avg-calculator');
 
-  const showPage = (pageId: string, isDropdown: boolean = false) => {
+  // isDropdown 파라미터가 사용되지 않아 경고가 발생하므로 제거했습니다.
+  const showPage = (pageId: string) => {
     setActivePage(pageId);
-    // SEO를 위해 페이지 제목을 동적으로 변경할 수 있습니다.
-    // document.title = pageTitles[pageId] || '주린이 필수 툴박스';
   };
 
   const renderPage = () => {

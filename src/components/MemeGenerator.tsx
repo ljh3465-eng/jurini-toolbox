@@ -109,6 +109,7 @@ export default function MemeGenerator() {
                 {imageUrl && (
                     <div id="image-preview-container">
                         <h3>생성된 이미지</h3>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img id="image-preview" src={imageUrl} alt="생성된 물타기 짤" />
                         <a id="download-btn" href={imageUrl} download="my_stock_story.png" className="calc-button primary">이미지 다운로드</a>
                     </div>
@@ -144,3 +145,4 @@ export default function MemeGenerator() {
         </>
     );
 }
+
