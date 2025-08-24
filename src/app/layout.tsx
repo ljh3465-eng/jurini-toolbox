@@ -24,12 +24,11 @@ export default function RootLayout({
     <html lang="ko">
       <head>
         {/* ↓↓↓ 2. head 태그 안에 애드센스 코드를 넣습니다. ↓↓↓ */}
-        <Script
+        <script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8531773061576363"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        ></script>
         {/* ↑↑↑ 여기까지 추가하세요! ↑↑↑ */}
       </head>
       <body>{children}</body>
