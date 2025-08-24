@@ -26,7 +26,7 @@ export default function RootLayout({
         {/* ↓↓↓ 2. head 태그 안에 애드센스 코드를 넣습니다. ↓↓↓ */}
         <Script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8531773061576363"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
