@@ -1,4 +1,8 @@
+// src/app/layout.tsx
+
 import type { Metadata } from "next";
+// ↓↓↓ 1. next/script에서 Script를 import 합니다. ↓↓↓
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,10 +22,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>
-        {/* children이 page.tsx의 내용을 렌더링합니다. */}
-        {children}
-      </body>
+      <head>
+        {/* ↓↓↓ 2. head 태그 안에 애드센스 코드를 넣습니다. ↓↓↓ */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+        {/* ↑↑↑ 여기까지 추가하세요! ↑↑↑ */}
+      </head>
+      <body>{children}</body>
     </html>
   );
 }
