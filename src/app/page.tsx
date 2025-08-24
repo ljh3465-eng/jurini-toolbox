@@ -1,95 +1,49 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import { useState } from 'react';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import AvgCalculator from '../components/AvgCalculator';
+import MemeGenerator from '../components/MemeGenerator';
+import DividendCalculator from '../components/DividendCalculator';
+import Dictionary from '../components/Dictionary';
+import UsefulSites from '../components/UsefulSites';
+import Guide from '../components/Guide';
+import About from '../components/About';
+import PrivacyPolicy from '../components/PrivacyPolicy';
+import Contact from '../components/Contact';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [activePage, setActivePage] = useState('avg-calculator');
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
+  const showPage = (pageId: string, isDropdown: boolean = false) => {
+    setActivePage(pageId);
+    // SEO를 위해 페이지 제목을 동적으로 변경할 수 있습니다.
+    // document.title = pageTitles[pageId] || '주린이 필수 툴박스';
+  };
+
+  const renderPage = () => {
+    switch (activePage) {
+      case 'avg-calculator': return <AvgCalculator />;
+      case 'meme-generator': return <MemeGenerator />;
+      case 'dividend-calculator': return <DividendCalculator />;
+      case 'dictionary': return <Dictionary />;
+      case 'useful-sites': return <UsefulSites />;
+      case 'guide': return <Guide />;
+      case 'about': return <About />;
+      case 'privacy-policy': return <PrivacyPolicy />;
+      case 'contact': return <Contact />;
+      default: return <AvgCalculator />;
+    }
+  };
+
+  return (
+    <>
+      <Navbar activePage={activePage} showPage={showPage} />
+      <main className="main-content">
+        {renderPage()}
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      <Footer showPage={showPage} />
+    </>
   );
 }
