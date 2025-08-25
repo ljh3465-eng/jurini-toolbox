@@ -9,7 +9,6 @@ export const metadata: Metadata = {
   title: "주린이 필수 툴박스",
   description: "주린이를 위한 물타기 계산기, 배당금 계산기, 투자 용어 사전 등 유용한 주식 투자 도구 모음.",
   
-  // ↓↓↓ 이 부분을 추가하세요! ↓↓↓
   openGraph: {
     title: "주린이 필수 툴박스",
     description: "물타기 계산기부터 투자 꿀팁까지 한번에!",
@@ -25,7 +24,6 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     type: "website",
   },
-  // ↑↑↑ 여기까지 추가하세요! ↑↑↑
 
   verification: {
     other: {
@@ -42,14 +40,13 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
-        {/* ↓↓↓ 2. head 태그 안에 애드센스 코드를 Next.js Script 컴포넌트로 넣습니다. ↓↓↓ */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8531773061576363"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
+          // ↓↓↓ 로딩 전략을 변경하여 구글 로봇이 더 빨리 코드를 찾도록 합니다. ↓↓↓
+          strategy="beforeInteractive"
         />
-        {/* ↑↑↑ 여기까지 수정하세요! ↑↑↑ */}
       </head>
       <body>{children}</body>
     </html>
