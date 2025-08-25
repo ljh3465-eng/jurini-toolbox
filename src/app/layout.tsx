@@ -41,11 +41,11 @@ export default function RootLayout({
     <html lang="ko">
       <head>
         <Script
+          id="adsbygoogle-script" // 스크립트에 고유 ID 부여
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8531773061576363"
           crossOrigin="anonymous"
-          // ↓↓↓ 로딩 전략을 변경하여 구글 로봇이 더 빨리 코드를 찾도록 합니다. ↓↓↓
-          strategy="beforeInteractive"
+          strategy="afterInteractive" // 다시 afterInteractive로 변경하여 페이지 성능 우선
         />
       </head>
       <body>{children}</body>
