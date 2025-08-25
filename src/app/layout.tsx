@@ -46,7 +46,7 @@ export default function RootLayout({
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8531773061576363"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
           strategy="afterInteractive"
         />
         {/* ↑↑↑ 여기까지 수정하세요! ↑↑↑ */}
