@@ -1,15 +1,33 @@
 // src/app/layout.tsx
 
 import type { Metadata } from "next";
-// ↓↓↓ 1. next/script에서 Script를 import 합니다. ↓↓↓
 import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  // title과 description이 OG 데이터의 기본값이 됩니다.
   title: "주린이 필수 툴박스",
   description: "주린이를 위한 물타기 계산기, 배당금 계산기, 투자 용어 사전 등 유용한 주식 투자 도구 모음.",
+  
+  // ↓↓↓ 이 부분을 추가하세요! ↓↓↓
+  openGraph: {
+    title: "주린이 필수 툴박스",
+    description: "물타기 계산기부터 투자 꿀팁까지 한번에!",
+    url: "https://jurinitools.com", // 여기에 본인 도메인 주소를 입력하세요.
+    siteName: "주린이 툴박스",
+    images: [
+      {
+        url: "/og-image.svg", // public 폴더의 이미지를 가리킵니다.
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "ko_KR",
+    type: "website",
+  },
+  // ↑↑↑ 여기까지 추가하세요! ↑↑↑
+
   verification: {
-    // google 인증 코드는 이제 사용하지 않으므로 제거합니다.
     other: {
       "naver-site-verification": "fcfee74366a02e63eea409edcc3dd7cce915673b",
     },
