@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
+import GoogleAnalytics from "../components/GoogleAnalytics";
 
 export const metadata: Metadata = {
   // title과 description이 OG 데이터의 기본값이 됩니다.
@@ -48,7 +49,11 @@ export default function RootLayout({
           strategy="afterInteractive" // 다시 afterInteractive로 변경하여 페이지 성능 우선
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {/* ↓↓↓ 2. body 태그 바로 아래에 GoogleAnalytics 컴포넌트를 넣습니다. ↓↓↓ */}
+        {/* "G-XXXXXXXXXX" 부분을 본인의 측정 ID로 꼭 교체해주세요! */}
+        <GoogleAnalytics measurementId="G-WSXEDP0YMJ" />
+        {children}</body>
     </html>
   );
 }
