@@ -1,5 +1,6 @@
 'use client';
-import { useState, useMemo } from 'react';
+// useEffect를 import 목록에 추가합니다.
+import { useState, useMemo, useEffect } from 'react';
 
 const dictionaryData = [
     { term: 'PER', definition: "회사의 가성비를 알려주는 지표예요. 붕어빵 가게가 1년에 100만원 버는데 가게를 1,000만원에 판다면 PER은 10배! 이 숫자가 낮을수록 회사가 버는 돈에 비해 주가가 싸다는 뜻이라 '저평가'되었다고 말해요." },
@@ -27,7 +28,8 @@ export default function Dictionary() {
     );
 
     // 검색 결과가 변경될 때 선택된 항목을 업데이트
-    useState(() => {
+    // useState를 useEffect로 수정합니다.
+    useEffect(() => {
         if (filteredTerms.length > 0) {
             setSelectedTerm(filteredTerms[0]);
         } else {
