@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AvgCalculator from '../components/AvgCalculator';
 import MemeGenerator from '../components/MemeGenerator';
+import ImaginaryRichMemeGenerator from '../components/ImaginaryRichMemeGenerator'; // 새로 추가
 import DividendCalculator from '../components/DividendCalculator';
 import Dictionary from '../components/Dictionary';
 import UsefulSites from '../components/UsefulSites';
@@ -16,7 +17,6 @@ import Contact from '../components/Contact';
 export default function Home() {
   const [activePage, setActivePage] = useState('avg-calculator');
 
-  // isDropdown 파라미터가 사용되지 않아 경고가 발생하므로 제거했습니다.
   const showPage = (pageId: string) => {
     setActivePage(pageId);
   };
@@ -25,6 +25,7 @@ export default function Home() {
     switch (activePage) {
       case 'avg-calculator': return <AvgCalculator />;
       case 'meme-generator': return <MemeGenerator />;
+      case 'imaginary-rich': return <ImaginaryRichMemeGenerator />; // 새로 추가
       case 'dividend-calculator': return <DividendCalculator />;
       case 'dictionary': return <Dictionary />;
       case 'useful-sites': return <UsefulSites />;
