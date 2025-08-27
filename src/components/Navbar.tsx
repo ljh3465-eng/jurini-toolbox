@@ -15,7 +15,7 @@ export default function Navbar({ activePage, showPage }: NavbarProps) {
         <nav className="navbar">
             <div 
                 className="logo" 
-                onClick={() => showPage('avg-calculator')} 
+                onClick={() => showPage('guide')} // 로고 클릭 시 가이드로 이동
                 style={{ cursor: 'pointer' }}
             >
                 🐣 주린이 툴박스
@@ -24,9 +24,10 @@ export default function Navbar({ activePage, showPage }: NavbarProps) {
                 <button className={`nav-button ${activePage === 'avg-calculator' ? 'active' : ''}`} onClick={() => showPage('avg-calculator')}>물타기 계산기</button>
                 <button className={`nav-button ${activePage === 'meme-generator' ? 'active' : ''}`} onClick={() => showPage('meme-generator')}>물타기 짤</button>
                 <button className={`nav-button ${activePage === 'imaginary-rich' ? 'active' : ''}`} onClick={() => showPage('imaginary-rich')}>상상부자 짤</button>
+                {/* ↓↓↓ 2. 기본 활성화 메뉴를 '주린이 가이드'로 변경합니다. ↓↓↓ */}
                 <button className={`nav-button ${activePage === 'guide' ? 'active' : ''}`} onClick={() => showPage('guide')}>주린이 가이드</button>
                 <div className="dropdown">
-                    <button className={`nav-button dropdown-btn ${dropdownItems.some(item => item.id === activePage) ? 'active' : ''}`}>더보기 ▼</button>
+                    <button className={`nav-button dropdown-btn ${dropdownItems.some(item => item.id === activePage) || activePage === 'dividend-calculator' ? 'active' : ''}`}>더보기 ▼</button>
                     <div className="dropdown-content">
                         <button onClick={() => showPage('dividend-calculator', true)}>배당금 계산기</button>
                         {dropdownItems.map(item => (

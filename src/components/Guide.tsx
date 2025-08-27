@@ -1,5 +1,9 @@
 'use client';
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
+
+interface GuideProps {
+    showPage: (pageId: string, isDropdown?: boolean) => void;
+}
 
 // 가이드 데이터를 컴포넌트 외부 또는 별도 파일로 분리할 수 있습니다.
 const guideData = {
@@ -193,10 +197,84 @@ const guideData = {
             </ul>
             <p>주린이에게는 변동성이 큰 시장에서 빠른 판단을 내려야 하는 트레이딩보다, 좋은 기업과 함께 천천히 성장하는 '투자'의 관점으로 접근하는 것이 훨씬 더 안정적이고 성공 확률이 높습니다. 자신의 성향을 파악하고, 그에 맞는 전략을 세워보세요!</p>
         `
+    },
+    'article-12': {
+        title: "투자 명언 | 피터 린치 '아는 것에 투자하라'",
+        summary: "전설적인 펀드매니저 피터 린치가 말하는 생활 속 투자 아이디어 발견법!",
+        content: `
+            <h3>"당신이 잘 아는 것에 투자하라. 그리고 당신이 무엇을 소유하고 있는지 알아야 한다."</h3>
+            <p>월가의 영웅, 피터 린치의 이 명언은 주린이에게 가장 현실적인 투자 나침반이 되어줍니다. 그는 전문적인 분석가들보다, 일상생활 속에서 좋은 투자 아이디어를 발견할 수 있다고 강조했습니다.</p>
+            <h4>내 주변의 모든 것이 투자 기회다</h4>
+            <p>예를 들어, 내가 매일 사 먹는 과자, 새로 산 스마트폰, 자주 가는 쇼핑몰 모두가 투자 대상이 될 수 있습니다. 내가 직접 사용해보고 만족한 제품이나 서비스가 있다면, 그 회사의 주식을 눈여겨보는 것이 투자의 시작입니다.</p>
+            <ul>
+                <li><strong>내가 전문가다:</strong> 내가 일하는 산업, 내 취미와 관련된 분야에서는 월가의 전문가들보다 내가 더 깊이 있는 통찰력을 가질 수 있습니다.</li>
+                <li><strong>간단한 아이디어의 힘:</strong> 세상을 바꿀 복잡한 기술이 아니더라도, 우리 생활을 조금 더 편리하게 만드는 간단한 아이디어에서 훌륭한 기업이 탄생할 수 있습니다.</li>
+            </ul>
+            <p>투자를 어렵게 생각하지 마세요. 오늘 퇴근길에 주변 상점들을 둘러보며 "저 가게는 왜 장사가 잘될까?"라고 생각해보는 것만으로도, 당신은 이미 피터 린치의 길을 걷고 있는 것입니다. 마음에 드는 회사를 찾았다면, <strong><a href="#" onclick="event.preventDefault(); window.dispatchEvent(new CustomEvent('showPage', { detail: 'useful-sites' }))">유용한 사이트</a></strong>의 DART에서 그 회사의 사업보고서를 꼭 확인해보세요!</p>
+        `
+    },
+    'article-13': {
+        title: "배당금 받기, 이것만 알면 끝! (배당락일, 배당기준일)",
+        summary: "배당금을 받으려면 언제까지 주식을 사야 할까요? 가장 헷갈리는 날짜 개념을 정리해 드립니다.",
+        content: `
+            <h3>배당금, 받고 싶은데 너무 헷갈려요!</h3>
+            <p>배당주 투자를 할 때 주린이들이 가장 헷갈려 하는 것이 바로 날짜 개념입니다. '배당기준일'에 주식을 가지고 있으면 된다고 생각했다가 배당금을 못 받는 경우가 많죠. 딱 두 가지 날짜만 기억하면 절대 실수하지 않습니다.</p>
+            <h4>핵심은 '배당락일' 하루 전!</h4>
+            <p>우리나라 주식은 매수 후 실제 내 계좌에 등록되기까지 이틀(T+2일)이 걸립니다. 이 때문에 발생하는 날짜 차이를 이해해야 합니다.</p>
+            <ol>
+                <li><strong>배당기준일:</strong> 회사가 "이날 주주명부에 이름이 있는 사람들에게 배당금을 주겠다!"고 정한 공식적인 날짜입니다. 보통 12월 31일인 경우가 많습니다.</li>
+                <li><strong>배당락일:</strong> 배당을 받을 권리가 사라지는 날입니다. 이 날 주식을 사면, 아쉽게도 이번 배당은 받을 수 없습니다. 보통 배당기준일 하루 전 영업일입니다.</li>
+            </ol>
+            <p>결론적으로, 내가 배당금을 받으려면 **'배당락일' 최소 하루 전에는 주식을 매수해야** 안전하게 주주명부에 이름을 올릴 수 있습니다! 내가 받을 배당금이 얼마일지 궁금하다면, 저희 <strong><a href="#" onclick="event.preventDefault(); window.dispatchEvent(new CustomEvent('showPage', { detail: 'dividend-calculator' }))">배당금 계산기</a></strong>로 미리 계산해보세요.</p>
+        `
+    },
+    'article-14': {
+        title: "공포의 '유상증자', 도대체 뭐길래 주가가 떨어질까?",
+        summary: "어느 날 갑자기 내 주식이 폭락했다면? 유상증자의 개념과 주주에게 미치는 영향을 알려드립니다.",
+        content: `
+            <h3>유상증자, 주주에게 날아온 폭탄?</h3>
+            <p>유상증자(유증)는 회사가 돈이 필요할 때, 새로운 주식을 발행해서 기존 주주나 새로운 투자자에게 돈을 받고 파는 것을 말합니다. 회사가 사업 확장을 위해 돈을 모으는 긍정적인 신호일 수도 있지만, 대부분의 경우 주가에 악재로 작용합니다.</p>
+            <h4>왜 주가가 떨어질까요?</h4>
+            <p>가장 큰 이유는 '주식 가치의 희석' 때문입니다. 피자 한 판을 8명이 나눠 먹고 있었는데, 갑자기 8조각을 더 가져와서 16명이 나눠 먹게 되는 것과 같습니다. 피자 조각의 크기가 절반으로 줄어드는 것처럼, 내가 가진 주식 1주의 가치가 떨어지게 되는 거죠.</p>
+            <ul>
+                <li><strong>공급 증가:</strong> 시장에 주식 수가 갑자기 늘어나니, 주식의 가격이 떨어질 수밖에 없습니다.</li>
+                <li><strong>기존 주주 불만:</strong> 보통 새로운 주식은 현재 시장 가격보다 훨씬 싸게 발행되기 때문에, 비싸게 산 기존 주주들은 손해를 본다는 생각에 주식을 팔게 됩니다.</li>
+            </ul>
+            <p>물론 유상증자로 확보한 자금으로 회사가 크게 성장한다면 장기적으로는 호재가 될 수도 있습니다. 하지만 단기적으로는 주가 하락을 피하기 어려운 경우가 많으니, 내가 투자한 회사가 유상증자를 발표했다면 그 목적과 조건을 꼼꼼히 살펴보는 것이 중요합니다.</p>
+        `
+    },
+    'article-15': {
+        title: "나는 '투자'를 하고 있을까, '투기'를 하고 있을까?",
+        summary: "성공과 실패를 가르는 한 끗 차이! 투자와 투기의 근본적인 차이점을 알아봅니다.",
+        content: `
+            <h3>투자 vs 투기, 무엇이 다른가요?</h3>
+            <p>많은 사람들이 주식 시장에서 돈을 버는 모든 행위를 '투자'라고 생각하지만, 실제로는 '투자'와 '투기(Speculation)'는 동기부터 다릅니다. 이 차이를 이해하는 것이 성공적인 투자자가 되는 첫걸음입니다.</p>
+            <h4>핵심 차이는 '기업의 성장'을 보는가</h4>
+            <ul>
+                <li><strong>투자 (Investment):</strong> 내가 돈을 넣는 '기업의 성장'에 초점을 맞춥니다. 기업의 가치를 분석하고, 장기적으로 기업이 성장하면 내 자산도 함께 늘어날 것이라고 믿습니다. 마치 과수원의 나무를 사서, 나무가 자라 열매를 맺기를 기다리는 것과 같습니다.</li>
+                <li><strong>투기 (Speculation):</strong> 기업의 가치보다는 오직 '가격 변동'에만 집중합니다. 다른 사람이 더 비싼 가격에 사줄 것이라는 기대감만으로 주식을 삽니다. 이것은 내용물은 보지 않고 포장지만 보고 물건을 사는 것과 같습니다.</li>
+            </ul>
+            <p>물론 단기적인 매매(트레이딩)가 모두 나쁜 투기는 아닙니다. 하지만 주린이라면, 내가 지금 주식을 사는 이유가 "이 회사가 앞으로 돈을 더 잘 벌 것 같아서"인지, 아니면 "그냥 왠지 오를 것 같아서"인지 스스로에게 질문해보는 습관이 필요합니다. 전자가 바로 '투자'의 시작입니다.</p>
+        `
+    },
+    'article-16': {
+        title: "주린이를 위한 초간단 재무제표 읽기 (이것만은 꼭!)",
+        summary: "회계는 몰라도 괜찮아요! 회사의 건강상태를 진단하는 3가지 핵심 지표를 알려드립니다.",
+        content: `
+            <h3>재무제표, 숫자만 봐도 머리가 아프신가요?</h3>
+            <p>재무제표는 회사의 '건강검진표'와 같습니다. 복잡해 보이지만, 딱 3가지만 확인해도 이 회사가 튼튼한지, 돈은 잘 버는지, 미래 성장 가능성은 있는지 큰 그림을 파악할 수 있습니다.</p>
+            <h4>주린이가 꼭 봐야 할 3가지 핵심 지표</h4>
+            <ol>
+                <li><strong>매출액 & 영업이익:</strong> 가장 기본! 회사가 '장사'를 얼마나 잘하고 있는지를 보여줍니다. 매출액(총 판매금액)과 영업이익(매출액에서 원가를 뺀 순수익)이 지난 몇 년간 꾸준히 성장하고 있다면, 일단 합격입니다.</li>
+                <li><strong>부채비율:</strong> 회사가 '빚'이 얼마나 있는지를 보여줍니다. 이 비율이 너무 높으면(보통 200% 이상) 위험 신호일 수 있습니다. 저희 <strong><a href="#" onclick="event.preventDefault(); window.dispatchEvent(new CustomEvent('showPage', { detail: 'dictionary' }))">주식 용어 사전</a></strong>에서 '부채비율'의 쉬운 설명을 확인해보세요.</li>
+                <li><strong>ROE (자기자본이익률):</strong> 회사가 '자기 돈'으로 얼마나 효율적으로 돈을 버는지를 보여주는 '수익성 지표'입니다. ROE가 은행 금리보다 훨씬 높고, 꾸준히 유지되거나 상승한다면 '일 잘하는 회사'라고 할 수 있습니다.</li>
+            </ol>
+            <p>처음에는 이 세 가지만이라도 DART에서 확인하는 습관을 들여보세요. 숫자가 말해주는 회사의 진짜 모습을 발견하는 재미를 느끼실 수 있을 겁니다.</p>
+        `
     }
 };
 
-export default function Guide() {
+export default function Guide({ showPage }: GuideProps) {
     const [selectedArticle, setSelectedArticle] = useState<string | null>(null);
 
     const showArticle = (articleId: string) => {
@@ -206,6 +284,22 @@ export default function Guide() {
     const showGuideList = () => {
         setSelectedArticle(null);
     };
+    // 글 내부의 링크 클릭을 처리하기 위한 useEffect
+    // useState를 useEffect로 수정합니다.
+    useEffect(() => {
+        const handleShowPage = (event: Event) => {
+            const customEvent = event as CustomEvent;
+            showPage(customEvent.detail);
+        };
+
+        window.addEventListener('showPage', handleShowPage);
+        
+        // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+        return () => {
+            window.removeEventListener('showPage', handleShowPage);
+        };
+    }, [showPage]);
+
 
     if (selectedArticle && guideData[selectedArticle as keyof typeof guideData]) {
         const article = guideData[selectedArticle as keyof typeof guideData];
@@ -224,7 +318,7 @@ export default function Guide() {
                 <h2>📝 주린이 가이드</h2>
                 <div className="guide-list-container">
                     <ul className="guide-list">
-                        {Object.keys(guideData).map(id => {
+                        {Object.keys(guideData).sort((a, b) => Number(b.replace('article-', '')) - Number(a.replace('article-', ''))).map(id => {
                             const article = guideData[id as keyof typeof guideData];
                             return (
                                 <li key={id} className="guide-item">
