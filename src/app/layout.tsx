@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     siteName: "주린이 툴박스",
     images: [
       {
-        url: "/og-image.png", // public 폴더의 이미지를 가리킵니다.
+        url: "https://jurinitools.com/og-image.png", // public 폴더의 이미지를 가리킵니다.
         width: 1200,
         height: 630,
       },
