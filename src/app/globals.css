@@ -349,16 +349,25 @@ header {
     margin-top: 0;
     font-size: 1.5rem;
 }
-.term-definition p {
-    line-height: 1.7;
-    font-size: 1rem;
+.term-definition .post-content {
+    line-height: 1.8;
+}
+.term-definition .post-content h3, .term-definition .post-content h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    border-left: 4px solid var(--primary-color);
+    padding-left: 0.8rem;
+}
+.term-definition .post-content p {
+    margin-bottom: 1rem;
 }
 
 /* Useful Sites Styles */
 .site-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem; /* 카드 사이 간격 조정 */
+    gap: 1.5rem;
 }
 
 .site-card-link {
@@ -370,11 +379,10 @@ header {
     background-color: #f9f9f9;
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 2rem; /* 카드 내부 여백 증가 */
+    padding: 2rem; /* 여백 조정 */
     display: flex;
-    flex-direction: column; /* 아이콘과 텍스트를 세로로 정렬 */
-    align-items: flex-start; /* 왼쪽 정렬 */
-    gap: 1rem; /* 아이콘과 텍스트 사이 간격 */
+    gap: 1.5rem;
+    align-items: center;
     height: 100%;
     transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -385,7 +393,7 @@ header {
 }
 
 .site-card-icon {
-    font-size: 2.25rem; /* 아이콘 크기 약간 조정 */
+    font-size: 2.2rem; /* 아이콘 크기 조정 */
 }
 
 .site-card-content h3 {
@@ -542,4 +550,3 @@ footer {
         grid-template-columns: 1fr; /* 모바일에서는 1열로 표시 */
     }
 }
-
