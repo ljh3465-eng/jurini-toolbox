@@ -1,8 +1,13 @@
 'use client';
-// useEffect를 import 목록에 추가합니다.
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
-const dictionaryData = [
+// GuidePost 타입을 정의합니다.
+interface Term {
+  term: string;
+  definition: string;
+}
+
+const dictionaryData: Term[] = [
     { term: 'PER', definition: "회사의 가성비를 알려주는 지표예요. 붕어빵 가게가 1년에 100만원 버는데 가게를 1,000만원에 판다면 PER은 10배! 이 숫자가 낮을수록 회사가 버는 돈에 비해 주가가 싸다는 뜻이라 '저평가'되었다고 말해요." },
     { term: 'PBR', definition: '회사의 청산가치예요. 만약 회사가 지금 당장 망해서 모든 자산을 팔았을 때, 내 주머니에 얼마가 들어올지 알려줘요. PBR이 1보다 낮다면? 회사의 자산 가치보다도 주가가 싸다는 아주 매력적인 신호일 수 있어요!' },
     { term: 'ROE', definition: "'내 돈으로 얼마나 잘 벌었나?'를 보여주는 회사의 성적표예요. ROE가 20%라면, 회사가 자기 돈 1억으로 1년에 2,000만원을 벌었다는 뜻! 이 숫자가 높을수록 돈 버는 능력이 뛰어난 '일 잘하는 회사'라고 할 수 있죠." },
@@ -15,11 +20,10 @@ const dictionaryData = [
     { term: '예수금', definition: "주식을 사기 위해 내 증권계좌에 넣어둔 총알(현금)이에요. 주식을 사면 예수금이 줄고, 팔면 다시 늘어나죠. 주식 주문을 넣기 전에 예수금이 충분한지 꼭 확인해야 해요!" },
     { term: '시가총액', definition: "회사의 덩치, 즉 회사의 전체 가격이에요. (현재 주가 X 총 주식 수)로 계산하죠. 시가총액이 크다는 건 그만큼 규모가 크고 안정적인 회사라는 뜻. 삼성전자의 시가총액이 가장 큰 것처럼요!" },
     { 
-         term: '캔들', 
+        term: '캔들', 
         definition: `
             <h3>하루 동안의 주가 전쟁, 그 기록!</h3>
             <p>캔들은 하루 동안 주가가 어떻게 움직였는지를 보여주는 그림이에요. 마치 그날 하루 동안 '사려는 사람'과 '팔려는 사람'이 얼마나 치열하게 싸웠는지 보여주는 전쟁 기록 같죠! 캔들 하나에는 4가지 중요한 정보가 모두 담겨있어요.</p>
-            
             <h4>📈 캔들의 4가지 기본 정보</h4>
             <p><strong>시가:</strong> 아침 9시, 주식 시장이 열렸을 때의 '시작 가격'</p>
             <p><strong>종가:</strong> 오후 3시 30분, 시장이 닫혔을 때의 '마지막 가격'</p>
@@ -27,22 +31,20 @@ const dictionaryData = [
             <p><strong>저가:</strong> 하루 중 가장 낮게 내려갔던 '최저 가격'</p>
 
             <h4>🔴 양봉 vs 🔵 음봉</h4>
-            <p>캔들의 색깔은 '시가'와 '종가'가 결정해요.</p>
             <p><strong>양봉 (빨간색):</strong> 종가가 시가보다 높게 끝났다는 뜻! 즉, '사려는 힘'이 이겨서 주가가 오른 날이에요.</p>
             <p><strong>음봉 (파란색):</strong> 종가가 시가보다 낮게 끝났다는 뜻! 즉, '팔려는 힘'이 이겨서 주가가 내린 날이에요.</p>
 
             <h4>📏 몸통과 꼬리</h4>
-            <p>캔들은 통통한 '몸통'과 얇은 '꼬리'로 이루어져 있어요.</p>
             <p><strong>몸통:</strong> 시가와 종가 사이의 가격 범위를 보여줘요. 몸통이 길수록 그날의 주가 변동이 컸다는 뜻!</p>
             <p><strong>꼬리:</strong> 몸통 위아래로 삐죽 나온 선이에요. 위꼬리는 그날의 '고가'를, 아래꼬리는 '저가'를 나타내죠. 꼬리가 길다는 건, 장중에 주가가 엄청나게 오르거나 내렸었다는 흔적이에요.</p>
         `
     }
 ];
 
-
 export default function Dictionary() {
+    // 기본 선택을 첫 번째 항목이 아닌 null로 시작하여, 검색 결과에 따라 유동적으로 표시
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedTerm, setSelectedTerm] = useState(dictionaryData[0]);
+    const [selectedTerm, setSelectedTerm] = useState<Term | null>(null);
 
     const filteredTerms = useMemo(() => 
         [...dictionaryData]
@@ -51,16 +53,16 @@ export default function Dictionary() {
         [searchTerm]
     );
 
-    // 검색 결과가 변경될 때 선택된 항목을 업데이트
-    // useState를 useEffect로 수정합니다.
+    // selectedTerm을 filteredTerms의 첫 번째 항목으로 초기화/업데이트
     useEffect(() => {
         if (filteredTerms.length > 0) {
             setSelectedTerm(filteredTerms[0]);
         } else {
-            setSelectedTerm({ term: '검색 결과 없음', definition: '입력하신 용어를 찾을 수 없습니다.' });
+            setSelectedTerm(null); // 검색 결과가 없으면 null로 설정
         }
     }, [filteredTerms]);
 
+    const displayTerm = selectedTerm || { term: '검색 결과 없음', definition: '입력하신 용어를 찾을 수 없습니다.'};
 
     return (
         <div className="tool-card">
@@ -74,21 +76,22 @@ export default function Dictionary() {
             />
             <div className="dictionary-container">
                 <div className="term-list">
-                    {filteredTerms.map((item) => (
+                    {filteredTerms.length > 0 ? filteredTerms.map((item) => (
                         <div 
                             key={item.term}
-                            className={`term-list-item ${selectedTerm.term === item.term ? 'active' : ''}`}
+                            className={`term-list-item ${selectedTerm?.term === item.term ? 'active' : ''}`}
                             onClick={() => setSelectedTerm(item)}
                         >
                             {item.term}
                         </div>
-                    ))}
+                    )) : <div className="no-results">검색 결과가 없습니다.</div>}
                 </div>
                 <div className="term-definition">
-                    <h3>{selectedTerm.term}</h3>
-                    <p>{selectedTerm.definition}</p>
+                    <h3>{displayTerm.term}</h3>
+                    <div className="post-content" dangerouslySetInnerHTML={{ __html: displayTerm.definition }} />
                 </div>
             </div>
         </div>
     );
 }
+
