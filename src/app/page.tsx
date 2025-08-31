@@ -11,7 +11,7 @@ import Guide from '../components/Guide';
 import About from '../components/About';
 import PrivacyPolicy from '../components/PrivacyPolicy';
 import Contact from '../components/Contact';
-import ImagineMemeGenerator from '../components/ImagineMemeGenerator;
+import ImagineMemeGenerator from '../components/ImagineMemeGenerator';
 
 // GuidePost 타입을 정의하여 여러 컴포넌트에서 공유합니다.
 export interface GuidePost {
