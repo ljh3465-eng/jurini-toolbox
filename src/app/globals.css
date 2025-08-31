@@ -18,7 +18,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     color: var(--text-color);
-    font-size: 16px; /* 기본 폰트 크기 조정 */
+    font-size: 16px;
 }
 
 main {
@@ -54,7 +54,7 @@ header {
 
 .logo h1 {
     margin: 0;
-    font-size: 1.25rem; /* 로고 글씨 크기 조정 */
+    font-size: 1.25rem;
     color: var(--text-color);
     cursor: pointer;
 }
@@ -62,14 +62,14 @@ header {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 0.8rem; /* 메뉴 간격 조정 */
+    gap: 0.8rem;
 }
 
 .nav-links button {
     background: none;
     border: none;
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.95rem; /* 메뉴 글씨 크기 조정 */
+    font-size: 0.95rem;
     font-weight: 700;
     cursor: pointer;
     padding: 0.5rem 1rem;
@@ -129,7 +129,7 @@ header {
     text-align: center;
     margin-top: 0;
     margin-bottom: 2rem;
-    font-size: 1.75rem; /* 제목 글씨 크기 조정 */
+    font-size: 1.75rem;
     color: var(--text-color);
 }
 
@@ -141,7 +141,7 @@ header {
     display: block;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    font-size: 0.9rem; /* 라벨 글씨 크기 조정 */
+    font-size: 0.9rem;
 }
 
 .form-group input,
@@ -168,7 +168,7 @@ header {
 }
 
 .tool-card button:hover {
-    background-color: #F57C00; /* Darker orange */
+    background-color: #F57C00;
 }
 
 .checkbox-group {
@@ -194,6 +194,43 @@ header {
     border-radius: 12px;
     border: 1px solid var(--primary-color);
 }
+.result-section h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+.result-section p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+.result-section span {
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+
+/* Instruction Box */
+.instruction-box {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+.instruction-box h4 {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.instruction-box p, .instruction-box ul {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+}
+.instruction-box li {
+    margin-bottom: 0.5rem;
+}
+
 
 /* Meme Generator specific styles */
 .meme-result {
@@ -216,52 +253,52 @@ header {
 .meme-template {
     background-color: #FFFBEF;
     border: 1px solid #ddd;
-    padding: 15px; /* 수정 */
+    padding: 15px;
     font-family: 'Noto Sans KR', sans-serif;
     color: #333;
 }
 .meme-header {
-    font-size: 14px; /* 수정 */
+    font-size: 14px;
     font-weight: bold;
-    margin-bottom: 12px; /* 수정 */
+    margin-bottom: 12px;
     border-bottom: 2px solid #ffc107;
-    padding-bottom: 8px; /* 수정 */
+    padding-bottom: 8px;
     text-align: center;
 }
 
 .meme-template h2 {
-    font-size: 22px; /* 수정 */
-    margin: 8px 0 15px; /* 수정 */
+    font-size: 22px;
+    margin: 8px 0 15px;
     color: #1a2a4c;
     text-align: center;
 }
 .meme-body {
-    margin: 15px 0; /* 수정 */
+    margin: 15px 0;
 }
 .meme-row {
     display: flex;
     justify-content: space-between;
-    font-size: 14px; /* 수정 */
-    padding: 6px 0; /* 수정 */
+    font-size: 14px;
+    padding: 6px 0;
     border-bottom: 1px solid #eee;
 }
 .meme-row span {
     color: #555;
 }
 .meme-footer {
-    margin-top: 15px; /* 수정 */
+    margin-top: 15px;
     text-align: center;
     background-color: #fff;
-    padding: 12px; /* 수정 */
+    padding: 12px;
     border-radius: 8px;
 }
 .meme-footer p {
     margin: 0;
-    font-size: 12px; /* 수정 */
+    font-size: 12px;
 }
 .meme-footer h3 {
-    margin: 4px 0 0; /* 수정 */
-    font-size: 20px; /* 수정 */
+    margin: 4px 0 0;
+    font-size: 20px;
 }
 
 .profit { color: #d32f2f; }
@@ -269,12 +306,76 @@ header {
 
 /* 물타기 짤 추가 스타일 */
 .water-meme .meme-subtitle {
-    font-size: 13px; /* 수정 */
+    font-size: 13px;
     font-weight: bold;
     color: #777;
-    margin-top: 15px; /* 수정 */
-    margin-bottom: 8px; /* 수정 */
+    margin-top: 15px;
+    margin-bottom: 8px;
     text-align: left;
+}
+
+/* Dictionary Styles */
+.dictionary-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+.term-list {
+    width: 200px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border-color);
+    height: 400px;
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+.term-list-item {
+    padding: 0.8rem;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: 500;
+}
+.term-list-item:hover {
+    background-color: #f5f5f5;
+}
+.term-list-item.active {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 700;
+}
+.term-definition {
+    flex-grow: 1;
+}
+.term-definition h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+.term-definition p {
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+/* Useful Sites Styles */
+.site-list {
+    list-style: none;
+    padding: 0;
+}
+.site-item {
+    margin-bottom: 2rem;
+}
+.site-item h3 {
+    margin: 0 0 0.5rem 0;
+}
+.site-item p {
+    margin: 0 0 0.8rem 0;
+    color: #666;
+}
+.site-item a {
+    color: var(--secondary-color);
+    font-weight: bold;
+    text-decoration: none;
+}
+.site-item a:hover {
+    text-decoration: underline;
 }
 
 /* Guide styles */
@@ -296,12 +397,12 @@ header {
 }
 .guide-list-item h3 {
     margin: 0 0 0.5rem 0;
-    font-size: 1.15rem; /* 가이드 목록 제목 크기 조정 */
+    font-size: 1.15rem;
 }
 .guide-list-item p {
     margin: 0;
     color: #666;
-    font-size: 0.9rem; /* 가이드 목록 요약 크기 조정 */
+    font-size: 0.9rem;
 }
 .guide-post {
     padding: 1rem;
@@ -333,7 +434,11 @@ header {
     margin-top: 2rem;
 }
 
-/* Footer styles */
+/* Policy & Footer Styles */
+.policy-container {
+    line-height: 1.7;
+}
+
 footer {
     background-color: var(--footer-bg-color);
     border-top: 1px solid var(--border-color);
@@ -348,6 +453,10 @@ footer {
 }
 .footer-links {
     margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
 }
 .footer-links button {
     background: none;
@@ -356,7 +465,6 @@ footer {
     color: #555;
     font-size: 0.9rem;
     padding: 0;
-    margin: 0 0.5rem;
 }
 .footer-links button:hover {
     text-decoration: underline;
@@ -396,5 +504,17 @@ footer {
     }
     .tool-card h2 {
         font-size: 1.5rem;
+    }
+    .dictionary-container {
+        flex-direction: column;
+    }
+    .term-list {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding-right: 0;
+        margin-bottom: 1rem;
+        height: auto;
+        max-height: 200px;
     }
 }
