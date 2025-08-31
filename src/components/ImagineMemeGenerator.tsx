@@ -79,7 +79,7 @@ export default function ImagineMemeGenerator() {
                 </div>
             )}
             
-            <div style={{ position: 'absolute', left: '-9999px', width: '320px' }}>
+            <div style={{ position: 'absolute', left: '-9999px', width: '300px' }}>
                 <div ref={memeRef} className="meme-template imagine-meme">
                     <p className="meme-header">&quot;만약 내가 그때... 샀더라면?&quot;</p>
                     <h2>{inputs.stockName || 'OO전자'}</h2>
@@ -104,4 +104,3 @@ export default function ImagineMemeGenerator() {
         </div>
     );
 }
-
