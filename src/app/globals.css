@@ -228,6 +228,7 @@ header {
     padding-bottom: 10px;
     text-align: center;
 }
+/* ↓↓↓ 이미지 템플릿 전용 스타일 분리 및 폰트 크기 조정 ↓↓↓ */
 .meme-template h2 {
     font-size: 28px;
     margin: 10px 0 20px;
@@ -262,6 +263,8 @@ header {
     margin: 5px 0 0;
     font-size: 24px;
 }
+/* ↑↑↑ 이미지 템플릿 전용 스타일 분리 및 폰트 크기 조정 ↑↑↑ */
+
 .profit { color: #d32f2f; }
 .loss { color: #1976d2; }
 
@@ -396,3 +399,4 @@ footer {
         font-size: 1.5rem;
     }
 }
+
