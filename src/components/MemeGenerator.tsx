@@ -1,148 +1,103 @@
 'use client';
 import { useState, useRef } from 'react';
 
+interface Inputs {
+    stockName: string;
+    initialPrice: string;
+    initialShares: string;
+    additionalPrice: string;
+    additionalShares: string;
+}
+
 export default function MemeGenerator() {
-    const [inputs, setInputs] = useState({
+    const [inputs, setInputs] = useState<Inputs>({
         stockName: '',
         initialPrice: '',
         initialShares: '',
-        initialDate: '',
         additionalPrice: '',
         additionalShares: '',
-        additionalDate: '',
     });
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
-    const [showAmount, setShowAmount] = useState(true); // 금액 표시 체크박스 상태
-    const memeTemplateRef = useRef<HTMLDivElement>(null);
+    const [showAmount, setShowAmount] = useState(true);
+    const [imageUrl, setImageUrl] = useState('');
+    const memeRef = useRef<HTMLDivElement>(null);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
         setInputs(prev => ({ ...prev, [id]: value }));
     };
 
     const generateMeme = async () => {
-        // html2canvas는 브라우저에서만 동작하므로, 동적으로 import 합니다.
         const html2canvas = (await import('html2canvas')).default;
-        
-        const { stockName, initialPrice, initialShares, additionalPrice, additionalShares } = inputs;
-        if (!stockName || !initialPrice || !initialShares || !additionalPrice || !additionalShares) {
-            alert('모든 값을 입력해주세요!');
+        if (!inputs.stockName || !inputs.initialPrice || !inputs.initialShares || !inputs.additionalPrice || !inputs.additionalShares) {
+            alert("모든 정보를 입력해주세요!");
             return;
         }
-
-        if (memeTemplateRef.current) {
-            html2canvas(memeTemplateRef.current).then(canvas => {
-                setImageUrl(canvas.toDataURL('image/png'));
-            });
+        const element = memeRef.current;
+        if (element) {
+            const canvas = await html2canvas(element, { useCORS: true, backgroundColor: '#FFFBEF', scale: 2 });
+            setImageUrl(canvas.toDataURL('image/png'));
         }
     };
-    
-    // 실시간 계산을 위한 변수들
-    const initialPriceNum = Number(inputs.initialPrice);
-    const initialSharesNum = Number(inputs.initialShares);
-    const initialAmount = initialPriceNum * initialSharesNum;
 
-    const additionalPriceNum = Number(inputs.additionalPrice);
-    const additionalSharesNum = Number(inputs.additionalShares);
-    const additionalAmount = additionalPriceNum * additionalSharesNum;
+    const initialPriceNum = parseFloat(inputs.initialPrice) || 0;
+    const initialSharesNum = parseInt(inputs.initialShares) || 0;
+    const additionalPriceNum = parseFloat(inputs.additionalPrice) || 0;
+    const additionalSharesNum = parseInt(inputs.additionalShares) || 0;
 
     const totalShares = initialSharesNum + additionalSharesNum;
-    const totalInvestment = initialAmount + additionalAmount;
-    const finalPrice = totalShares > 0 ? Math.round(totalInvestment / totalShares) : 0;
+    const finalAvgPrice = totalShares > 0 ? ((initialPriceNum * initialSharesNum) + (additionalPriceNum * additionalSharesNum)) / totalShares : 0;
+    const initialAmount = initialPriceNum * initialSharesNum;
+    const additionalAmount = additionalPriceNum * additionalSharesNum;
 
     return (
-        <>
-            <div className="tool-card">
-                <h2>😭 내가 만약 그때... 물타기 짤 생성기</h2>
-                <div className="form-group">
-                    <label htmlFor="stockName">종목명</label>
-                    <input type="text" id="stockName" placeholder="삼성전자" value={inputs.stockName} onChange={handleChange} />
-                </div>
-                <hr style={{ margin: '25px 0', borderTop: '1px solid #eee', borderBottom: 'none' }} />
-                <h4>최초 매수 정보</h4>
-                <div className="input-grid">
-                    <div className="form-group">
-                        <label htmlFor="initialPrice">매수 단가</label>
-                        <input type="number" id="initialPrice" placeholder="80000" value={inputs.initialPrice} onChange={handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="initialShares">매수 수량</label>
-                        <input type="number" id="initialShares" placeholder="10" value={inputs.initialShares} onChange={handleChange} />
-                    </div>
-                </div>
-                <div className="form-group">
-                    <label>매수금액 (자동 계산)</label>
-                    <div className="calculated-amount">{initialAmount.toLocaleString()}원</div>
-                </div>
-                 <div className="form-group">
-                    <label htmlFor="initialDate">매수 일자</label>
-                    <input type="date" id="initialDate" value={inputs.initialDate} onChange={handleChange} />
-                </div>
-                <hr style={{ margin: '25px 0', borderTop: '1px solid #eee', borderBottom: 'none' }} />
-                <h4>놓쳐버린 물타기 정보</h4>
-                 <div className="input-grid">
-                    <div className="form-group">
-                        <label htmlFor="additionalPrice">물타기 가격</label>
-                        <input type="number" id="additionalPrice" placeholder="60000" value={inputs.additionalPrice} onChange={handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="additionalShares">물타기 수량</label>
-                        <input type="number" id="additionalShares" placeholder="10" value={inputs.additionalShares} onChange={handleChange} />
-                    </div>
-                </div>
-                <div className="form-group">
-                    <label>물타기 금액 (자동 계산)</label>
-                    <div className="calculated-amount">{additionalAmount.toLocaleString()}원</div>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="additionalDate">물타기 일자</label>
-                    <input type="date" id="additionalDate" value={inputs.additionalDate} onChange={handleChange} />
-                </div>
-                <div className="generate-controls">
-                    <button className="calc-button secondary" onClick={generateMeme}>짤 만들기!</button>
-                    <div className="checkbox-group">
-                        <input type="checkbox" id="showAmount" checked={showAmount} onChange={(e) => setShowAmount(e.target.checked)} />
-                        <label htmlFor="showAmount">금액 표시</label>
-                    </div>
-                </div>
-                
-                {imageUrl && (
-                    <div id="image-preview-container">
-                        <h3>생성된 이미지</h3>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img id="image-preview" src={imageUrl} alt="생성된 물타기 짤" />
-                        <a id="download-btn" href={imageUrl} download="my_stock_story.png" className="calc-button primary">이미지 다운로드</a>
-                    </div>
-                )}
+        <div className="tool-card">
+            <h2>😭 물타기 짤 생성기</h2>
+            <div className="form-group">
+                <label htmlFor="stockName">종목명</label>
+                <input type="text" id="stockName" value={inputs.stockName} onChange={handleInputChange} placeholder="예: 삼성전자" />
             </div>
-
-            {/* 화면 밖 숨겨진 짤 템플릿 */}
-            <div id="meme-template" ref={memeTemplateRef}>
-                <div className="meme-header">
-                    <h3>내가 만약 그때 물을 탔더라면...?</h3>
-                </div>
-                <div className="meme-section">
-                    <h4>😭 나의 원래 계획</h4>
-                    <p><span>종목명</span><strong>{inputs.stockName}</strong></p>
-                    <p><span>매수일</span><span>{inputs.initialDate || 'N/A'}</span></p>
-                    <p><span>평단가</span><strong>{initialPriceNum.toLocaleString()}원</strong></p>
-                    <p><span>수량</span><span>{initialSharesNum.toLocaleString()}주</span></p>
-                    {showAmount && <p><span>매수금액</span><strong>{initialAmount.toLocaleString()}원</strong></p>}
-                </div>
-                <div className="meme-section">
-                    <h4>🤔 놓쳐버린 물타기 기회</h4>
-                    <p><span>매수일</span><span>{inputs.additionalDate || 'N/A'}</span></p>
-                    <p><span>매수가</span><strong>{additionalPriceNum.toLocaleString()}원</strong></p>
-                    <p><span>수량</span><span>{additionalSharesNum.toLocaleString()}주</span></p>
-                    {showAmount && <p><span>물타기 금액</span><strong>{additionalAmount.toLocaleString()}원</strong></p>}
-                </div>
+            <div className="form-group">
+                <label>최초 매수 정보</label>
+                <input type="number" id="initialPrice" value={inputs.initialPrice} onChange={handleInputChange} placeholder="평단가 (예: 80000)" />
+                <input type="number" id="initialShares" value={inputs.initialShares} onChange={handleInputChange} placeholder="수량 (예: 10)" style={{marginTop: '10px'}}/>
+            </div>
+             <div className="form-group">
+                <label>추가 매수(물타기) 정보</label>
+                <input type="number" id="additionalPrice" value={inputs.additionalPrice} onChange={handleInputChange} placeholder="물타기 가격 (예: 60000)" />
+                <input type="number" id="additionalShares" value={inputs.additionalShares} onChange={handleInputChange} placeholder="물타기 수량 (예: 10)" style={{marginTop: '10px'}}/>
+            </div>
+            <div className="form-group checkbox-group">
+                <input type="checkbox" id="showAmount" checked={showAmount} onChange={(e) => setShowAmount(e.target.checked)} />
+                <label htmlFor="showAmount">금액 표시하기</label>
+            </div>
+            <button onClick={generateMeme}>🖼️ 내 평단가 짤 만들기!</button>
+            {imageUrl && (
                 <div className="meme-result">
-                    <p>내 평단가는 <span className="highlight">{initialPriceNum.toLocaleString()}</span>원 인데...<br />
-                    <span className="highlight">{finalPrice.toLocaleString()}</span>원이 될 수 있었다...</p>
+                    <h4>👇 아래 이미지를 꾹 눌러 저장하세요!</h4>
+                    <img src={imageUrl} alt="물타기 결과 짤" style={{ maxWidth: '100%', borderRadius: '8px' }} />
+                    <a href={imageUrl} download="jurini_meme.png" className="download-btn">이미지 다운로드</a>
                 </div>
-                <div className="meme-footer">- 주린이 툴박스에서 생성됨 -</div>
+            )}
+            <div style={{ position: 'absolute', left: '-9999px', width: '350px' }}>
+                <div ref={memeRef} className="meme-template water-meme">
+                    <p className="meme-header">"내가 만약 그때 물을 탔더라면...?"</p>
+                    <h2>{inputs.stockName || 'OO전자'}</h2>
+                    <div className="meme-body">
+                        <div className="meme-subtitle">😭 나의 원래 계획</div>
+                        <div className="meme-row"><span>평단가</span><strong>{initialPriceNum.toLocaleString()}원</strong></div>
+                        <div className="meme-row"><span>수량</span><strong>{initialSharesNum.toLocaleString()}주</strong></div>
+                        {showAmount && <div className="meme-row"><span>매수금액</span><strong>{initialAmount.toLocaleString()}원</strong></div>}
+                        <div className="meme-subtitle">😥 놓쳐버린 물타기 기회</div>
+                        <div className="meme-row"><span>물타기 가격</span><strong>{additionalPriceNum.toLocaleString()}원</strong></div>
+                        <div className="meme-row"><span>물타기 수량</span><strong>{additionalSharesNum.toLocaleString()}주</strong></div>
+                        {showAmount && <div className="meme-row"><span>물타기 금액</span><strong>{additionalAmount.toLocaleString()}원</strong></div>}
+                    </div>
+                    <div className="meme-footer">
+                        <p>내 평단가는 {initialPriceNum.toLocaleString()}원 인데...</p>
+                        <h3>{finalAvgPrice.toLocaleString('en-US', { maximumFractionDigits: 0 })}원이 될 수 있었다...</h3>
+                    </div>
+                </div>
             </div>
-        </>
+        </div>
     );
 }
-

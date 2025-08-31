@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AvgCalculator from '../components/AvgCalculator';
-import MemeGenerator from '../components/MemeGenerator';
+import MemeGenerator from '../components/MemeGenerator'; // 물타기 짤
 import DividendCalculator from '../components/DividendCalculator';
 import Dictionary from '../components/Dictionary';
 import UsefulSites from '../components/UsefulSites';
@@ -11,7 +11,7 @@ import Guide from '../components/Guide';
 import About from '../components/About';
 import PrivacyPolicy from '../components/PrivacyPolicy';
 import Contact from '../components/Contact';
-import ImagineMemeGenerator from '../components/ImagineMemeGenerator';
+import ImagineMemeGenerator from '../components/ImagineMemeGenerator;
 
 // GuidePost 타입을 정의하여 여러 컴포넌트에서 공유합니다.
 export interface GuidePost {
@@ -70,32 +70,21 @@ export default function Home() {
     }, [showPage, selectedGuidePost]);
 
 
-    const renderPage = () => {
+      const renderPage = () => {
         switch (showPage) {
-            case 'avg':
-                return <AvgCalculator />;
-            case 'meme':
-                return <MemeGenerator />;
-            case 'imagine':
-                return <ImagineMemeGenerator />;
-            case 'dividend':
-                return <DividendCalculator />;
-            case 'dictionary':
-                return <Dictionary />;
-            case 'sites':
-                return <UsefulSites />;
-            case 'guide':
-                return <Guide onPostSelect={setSelectedGuidePost} />;
-            case 'about':
-                return <About />;
-            case 'privacy':
-                return <PrivacyPolicy />;
-            case 'contact':
-                return <Contact />;
-            default:
-                return <Guide onPostSelect={setSelectedGuidePost} />;
+            case 'avg': return <AvgCalculator />;
+            case 'meme': return <MemeGenerator />;
+            case 'imagine': return <ImagineMemeGenerator />; // 분리된 컴포넌트 호출
+            case 'dividend': return <DividendCalculator />;
+            case 'dictionary': return <Dictionary />;
+            case 'sites': return <UsefulSites />;
+            case 'guide': return <Guide onPostSelect={setSelectedGuidePost} />;
+            case 'about': return <About />;
+            case 'privacy': return <PrivacyPolicy />;
+            case 'contact': return <Contact />;
+            default: return <Guide onPostSelect={setSelectedGuidePost} />;
         }
-    };
+      };
 
     return (
         <>

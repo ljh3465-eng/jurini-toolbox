@@ -1,7 +1,6 @@
 'use client';
 import { useState, useRef } from 'react';
 
-// 입력값들의 타입을 정의합니다.
 interface Inputs {
     stockName: string;
     purchasePrice: string;
@@ -16,7 +15,7 @@ export default function ImagineMemeGenerator() {
         purchaseShares: '',
         currentPrice: '',
     });
-    const [imageUrl, setImageUrl] = useState<string>('');
+    const [imageUrl, setImageUrl] = useState('');
     const memeRef = useRef<HTMLDivElement>(null);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,27 +24,18 @@ export default function ImagineMemeGenerator() {
     };
 
     const generateMeme = async () => {
-        // html2canvas 라이브러리를 동적으로 불러옵니다.
         const html2canvas = (await import('html2canvas')).default;
-        
-        const { stockName, purchasePrice, purchaseShares, currentPrice } = inputs;
-        if (!stockName || !purchasePrice || !purchaseShares || !currentPrice) {
+        if (!inputs.stockName || !inputs.purchasePrice || !inputs.purchaseShares || !inputs.currentPrice) {
             alert("모든 정보를 입력해주세요!");
             return;
         }
-
         const element = memeRef.current;
         if (element) {
-            const canvas = await html2canvas(element, { 
-                useCORS: true, 
-                backgroundColor: '#FFFBEF',
-                scale: 2 // 해상도 2배로 설정
-            });
+            const canvas = await html2canvas(element, { useCORS: true, backgroundColor: '#FFFBEF', scale: 2 });
             setImageUrl(canvas.toDataURL('image/png'));
         }
     };
-    
-    // 계산 로직
+
     const purchasePriceNum = parseFloat(inputs.purchasePrice) || 0;
     const purchaseSharesNum = parseInt(inputs.purchaseShares) || 0;
     const currentPriceNum = parseFloat(inputs.currentPrice) || 0;
@@ -80,7 +70,6 @@ export default function ImagineMemeGenerator() {
             {imageUrl && (
                 <div className="meme-result">
                     <h4>👇 아래 이미지를 꾹 눌러 저장하세요!</h4>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={imageUrl} alt="상상부자 수익률 짤" style={{ maxWidth: '100%', borderRadius: '8px' }} />
                     <a href={imageUrl} download="jurini_imagine_rich.png" className="download-btn">
                         이미지 다운로드
@@ -88,8 +77,7 @@ export default function ImagineMemeGenerator() {
                 </div>
             )}
             
-            {/* 실제 이미지를 생성하기 위한 숨겨진 영역 */}
-            <div style={{ position: 'absolute', left: '-9999px', top: '-9999px', width: '350px' }}>
+            <div style={{ position: 'absolute', left: '-9999px', width: '350px' }}>
                 <div ref={memeRef} className="meme-template imagine-meme">
                     <p className="meme-header">&quot;만약 내가 그때... 샀더라면?&quot;</p>
                     <h2>{inputs.stockName || 'OO전자'}</h2>

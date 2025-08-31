@@ -142,7 +142,8 @@ header {
     margin-bottom: 0.5rem;
 }
 
-.form-group input {
+.form-group input,
+.form-group select {
     width: 100%;
     padding: 0.8rem 1rem;
     border: 1px solid var(--border-color);
@@ -168,6 +169,21 @@ header {
     background-color: #F57C00; /* Darker orange */
 }
 
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+.checkbox-group input {
+    width: auto;
+}
+.checkbox-group label {
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+
 /* Result section */
 .result-section {
     margin-top: 2rem;
@@ -177,6 +193,86 @@ header {
     border: 1px solid var(--primary-color);
 }
 
+/* Meme Generator specific styles */
+.meme-result {
+    margin-top: 2rem;
+    text-align: center;
+}
+.meme-result h4 {
+    margin-bottom: 1rem;
+}
+.download-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 700;
+}
+.meme-template {
+    background-color: #FFFBEF;
+    border: 1px solid #ddd;
+    padding: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #333;
+}
+.meme-header {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ffc107;
+    padding-bottom: 10px;
+    text-align: center;
+}
+.meme-template h2 {
+    font-size: 28px;
+    margin: 10px 0 20px;
+    color: #1a2a4c;
+    text-align: center;
+}
+.meme-body {
+    margin: 20px 0;
+}
+.meme-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+.meme-row span {
+    color: #555;
+}
+.meme-footer {
+    margin-top: 20px;
+    text-align: center;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+}
+.meme-footer p {
+    margin: 0;
+    font-size: 14px;
+}
+.meme-footer h3 {
+    margin: 5px 0 0;
+    font-size: 24px;
+}
+.profit { color: #d32f2f; }
+.loss { color: #1976d2; }
+
+/* 물타기 짤 추가 스타일 */
+.water-meme .meme-subtitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: #777;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
 /* Guide styles */
 .guide-intro {
     text-align: center;
@@ -184,7 +280,6 @@ header {
     border-bottom: 1px solid var(--border-color);
     margin-bottom: 2rem;
 }
-
 .guide-list-item {
     padding: 1.5rem;
     border-bottom: 1px solid var(--border-color);
@@ -192,11 +287,9 @@ header {
     transition: background-color 0.2s;
     border-radius: 8px;
 }
-
 .guide-list-item:hover {
     background-color: #fafafa;
 }
-
 .guide-list-item h3 {
     margin: 0 0 0.5rem 0;
     font-size: 1.2rem;
@@ -205,30 +298,24 @@ header {
     margin: 0;
     color: #666;
 }
-
-
 .guide-post {
     padding: 1rem;
 }
-
 .guide-post .post-content {
     line-height: 1.8;
 }
-
 .guide-post h3, .guide-post h4 {
     margin-top: 2rem;
     margin-bottom: 1rem;
     border-left: 4px solid var(--primary-color);
     padding-left: 0.8rem;
 }
-
 .guide-post ul, .guide-post ol {
     padding-left: 20px;
 }
 .guide-post li {
     margin-bottom: 0.8rem;
 }
-
 .back-to-list-btn {
     margin-bottom: 2rem;
     width: auto !important;
@@ -241,24 +328,22 @@ header {
     margin-top: 2rem;
 }
 
+/* Footer styles */
 footer {
     background-color: var(--footer-bg-color);
     border-top: 1px solid var(--border-color);
     padding: 2rem 1rem;
     margin-top: 2rem;
 }
-
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
     text-align: center;
     color: #777;
 }
-
 .footer-links {
     margin-bottom: 1rem;
 }
-
 .footer-links button {
     background: none;
     border: none;
@@ -281,17 +366,30 @@ footer {
 
 /* Mobile responsive styles */
 @media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
     .navbar {
         flex-direction: column;
         height: auto;
         padding: 1rem;
     }
+    .logo h1 {
+        font-size: 1.2rem;
+    }
     .nav-links {
         margin-top: 1rem;
         flex-wrap: wrap;
         justify-content: center;
+        gap: 0.5rem;
+    }
+    .nav-links button {
+        font-size: 0.9rem;
     }
     .tool-card {
         padding: 1.5rem;
+    }
+    .tool-card h2 {
+        font-size: 1.5rem;
     }
 }
