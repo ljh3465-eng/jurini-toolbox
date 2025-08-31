@@ -80,7 +80,7 @@ export default function MemeGenerator() {
             )}
             <div style={{ position: 'absolute', left: '-9999px', width: '350px' }}>
                 <div ref={memeRef} className="meme-template water-meme">
-                    <p className="meme-header">"내가 만약 그때 물을 탔더라면...?"</p>
+                    <p className="meme-header">&quot;내가 만약 그때 물을 탔더라면...?&quot;</p>
                     <h2>{inputs.stockName || 'OO전자'}</h2>
                     <div className="meme-body">
                         <div className="meme-subtitle">😭 나의 원래 계획</div>

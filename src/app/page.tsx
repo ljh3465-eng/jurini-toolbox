@@ -72,19 +72,30 @@ export default function Home() {
 
       const renderPage = () => {
         switch (showPage) {
-            case 'avg': return <AvgCalculator />;
-            case 'meme': return <MemeGenerator />;
-            case 'imagine': return <ImagineMemeGenerator />; // 분리된 컴포넌트 호출
-            case 'dividend': return <DividendCalculator />;
-            case 'dictionary': return <Dictionary />;
-            case 'sites': return <UsefulSites />;
-            case 'guide': return <Guide onPostSelect={setSelectedGuidePost} />;
-            case 'about': return <About />;
-            case 'privacy': return <PrivacyPolicy />;
-            case 'contact': return <Contact />;
-            default: return <Guide onPostSelect={setSelectedGuidePost} />;
+            case 'avg':
+                return <AvgCalculator />;
+            case 'meme':
+                return <MemeGenerator />;
+            case 'imagine':
+                return <ImagineMemeGenerator />;
+            case 'dividend':
+                return <DividendCalculator />;
+            case 'dictionary':
+                return <Dictionary />;
+            case 'sites':
+                return <UsefulSites />;
+            case 'guide':
+                return <Guide onPostSelect={setSelectedGuidePost} />;
+            case 'about':
+                return <About />;
+            case 'privacy':
+                return <PrivacyPolicy />;
+            case 'contact':
+                return <Contact />;
+            default:
+                return <Guide onPostSelect={setSelectedGuidePost} />;
         }
-      };
+    };
 
     return (
         <>

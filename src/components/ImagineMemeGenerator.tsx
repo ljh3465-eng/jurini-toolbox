@@ -1,6 +1,7 @@
 'use client';
 import { useState, useRef } from 'react';
 
+// 입력값들의 타입을 정의합니다.
 interface Inputs {
     stockName: string;
     purchasePrice: string;
@@ -70,6 +71,7 @@ export default function ImagineMemeGenerator() {
             {imageUrl && (
                 <div className="meme-result">
                     <h4>👇 아래 이미지를 꾹 눌러 저장하세요!</h4>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={imageUrl} alt="상상부자 수익률 짤" style={{ maxWidth: '100%', borderRadius: '8px' }} />
                     <a href={imageUrl} download="jurini_imagine_rich.png" className="download-btn">
                         이미지 다운로드
