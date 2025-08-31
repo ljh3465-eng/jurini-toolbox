@@ -13,7 +13,7 @@ interface GuideProps {
     onPostSelect: (post: GuidePost | null) => void;
 }
 // 가이드 데이터를 컴포넌트 외부 또는 별도 파일로 분리할 수 있습니다.
-const guideData = {
+const guideData: { [key: string]: GuidePost } = {
     'article-1': {
         title: "투자 명언 | 워렌 버핏이 말하는 '10년 보유할 주식'의 진짜 의미",
         summary: '"10년 동안 보유할 주식이 아니라면, 10분도 보유하지 마라." 이 명언을 주린이는 어떻게 해석해야 할까요?',
@@ -383,7 +383,7 @@ export default function Guide({ onPostSelect }: GuideProps) {
     setShowList(true);
     setSelectedPost(null);
     onPostSelect(null); 
-  }, []);
+  }, [onPostSelect]); // 의존성 배열에 onPostSelect 추가
 
   const handlePostClick = (post: GuidePost) => {
     setSelectedPost(post);
