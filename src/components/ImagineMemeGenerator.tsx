@@ -63,15 +63,15 @@ export default function ImagineMemeGenerator() {
                 <input type="text" id="stockName" value={inputs.stockName} onChange={handleInputChange} placeholder="예: 엔비디아" />
             </div>
             <div className="form-group">
-                <label htmlFor="purchasePrice">"그때" 매수 가격 (1주당)</label>
+                <label htmlFor="purchasePrice">&quot;그때&quot; 매수 가격 (1주당)</label>
                 <input type="number" id="purchasePrice" value={inputs.purchasePrice} onChange={handleInputChange} placeholder="예: 150" />
             </div>
             <div className="form-group">
-                <label htmlFor="purchaseShares">"그때" 매수 수량 (주)</label>
+                <label htmlFor="purchaseShares">&quot;그때&quot; 매수 수량 (주)</label>
                 <input type="number" id="purchaseShares" value={inputs.purchaseShares} onChange={handleInputChange} placeholder="예: 10" />
             </div>
             <div className="form-group">
-                <label htmlFor="currentPrice">"현재" 가격 (1주당)</label>
+                <label htmlFor="currentPrice">&quot;현재&quot; 가격 (1주당)</label>
                 <input type="number" id="currentPrice" value={inputs.currentPrice} onChange={handleInputChange} placeholder="예: 1200" />
             </div>
 
@@ -80,6 +80,7 @@ export default function ImagineMemeGenerator() {
             {imageUrl && (
                 <div className="meme-result">
                     <h4>👇 아래 이미지를 꾹 눌러 저장하세요!</h4>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={imageUrl} alt="상상부자 수익률 짤" style={{ maxWidth: '100%', borderRadius: '8px' }} />
                     <a href={imageUrl} download="jurini_imagine_rich.png" className="download-btn">
                         이미지 다운로드
@@ -90,7 +91,7 @@ export default function ImagineMemeGenerator() {
             {/* 실제 이미지를 생성하기 위한 숨겨진 영역 */}
             <div style={{ position: 'absolute', left: '-9999px', top: '-9999px', width: '350px' }}>
                 <div ref={memeRef} className="meme-template imagine-meme">
-                    <p className="meme-header">"만약 내가 그때... 샀더라면?"</p>
+                    <p className="meme-header">&quot;만약 내가 그때... 샀더라면?&quot;</p>
                     <h2>{inputs.stockName || 'OO전자'}</h2>
                     <div className="meme-body">
                         <div className="meme-row">
