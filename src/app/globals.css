@@ -221,16 +221,16 @@ header {
     color: #333;
 }
 .meme-header {
-    font-size: 16px;
+    font-size: 15px; /* 수정 */
     font-weight: bold;
     margin-bottom: 15px;
     border-bottom: 2px solid #ffc107;
     padding-bottom: 10px;
     text-align: center;
 }
-/* ↓↓↓ 이미지 템플릿 전용 스타일 분리 및 폰트 크기 조정 ↓↓↓ */
+
 .meme-template h2 {
-    font-size: 28px;
+    font-size: 24px; /* 수정 */
     margin: 10px 0 20px;
     color: #1a2a4c;
     text-align: center;
@@ -241,7 +241,7 @@ header {
 .meme-row {
     display: flex;
     justify-content: space-between;
-    font-size: 16px;
+    font-size: 15px; /* 수정 */
     padding: 8px 0;
     border-bottom: 1px solid #eee;
 }
@@ -257,13 +257,12 @@ header {
 }
 .meme-footer p {
     margin: 0;
-    font-size: 14px;
+    font-size: 13px; /* 수정 */
 }
 .meme-footer h3 {
     margin: 5px 0 0;
-    font-size: 24px;
+    font-size: 22px; /* 수정 */
 }
-/* ↑↑↑ 이미지 템플릿 전용 스타일 분리 및 폰트 크기 조정 ↑↑↑ */
 
 .profit { color: #d32f2f; }
 .loss { color: #1976d2; }
@@ -399,4 +398,3 @@ footer {
         font-size: 1.5rem;
     }
 }
-
