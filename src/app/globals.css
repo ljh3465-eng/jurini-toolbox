@@ -241,8 +241,24 @@ header {
     margin-top: 2rem;
 }
 
+footer {
+    background-color: var(--footer-bg-color);
+    border-top: 1px solid var(--border-color);
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+}
 
-/* ... (다른 스타일들) */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    color: #777;
+}
+
+.footer-links {
+    margin-bottom: 1rem;
+}
+
 .footer-links button {
     background: none;
     border: none;
@@ -250,9 +266,17 @@ header {
     color: #555;
     font-size: 0.9rem;
     padding: 0;
+    margin: 0 0.5rem;
 }
 .footer-links button:hover {
     text-decoration: underline;
+}
+.footer-links span {
+    color: #ccc;
+}
+.footer-info p {
+    margin: 0.5rem 0;
+    font-size: 0.8rem;
 }
 
 /* Mobile responsive styles */
