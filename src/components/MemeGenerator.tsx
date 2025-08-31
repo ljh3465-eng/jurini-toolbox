@@ -78,7 +78,7 @@ export default function MemeGenerator() {
                     <a href={imageUrl} download="jurini_meme.png" className="download-btn">이미지 다운로드</a>
                 </div>
             )}
-            <div style={{ position: 'absolute', left: '-9999px', width: '350px' }}>
+            <div style={{ position: 'absolute', left: '-9999px', width: '320px' }}>
                 <div ref={memeRef} className="meme-template water-meme">
                     <p className="meme-header">&quot;내가 만약 그때 물을 탔더라면...?&quot;</p>
                     <h2>{inputs.stockName || 'OO전자'}</h2>
