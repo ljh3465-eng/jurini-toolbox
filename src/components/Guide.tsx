@@ -1,10 +1,17 @@
 'use client';
-import { useState , useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-interface GuideProps {
-    showPage: (pageId: string, isDropdown?: boolean) => void;
+// GuidePost 타입을 정의합니다.
+interface GuidePost {
+  title: string;
+  summary: string;
+  content: string;
 }
 
+// Guide 컴포넌트가 받을 props의 타입을 정의합니다.
+interface GuideProps {
+    onPostSelect: (post: GuidePost | null) => void;
+}
 // 가이드 데이터를 컴포넌트 외부 또는 별도 파일로 분리할 수 있습니다.
 const guideData = {
     'article-1': {
@@ -366,62 +373,59 @@ const guideData = {
     }
 };
 
-export default function Guide({ showPage }: GuideProps) {
-    const [selectedArticle, setSelectedArticle] = useState<string | null>(null);
+export default function Guide({ onPostSelect }: GuideProps) {
+  const [selectedPost, setSelectedPost] = useState<GuidePost | null>(null);
+  const [showList, setShowList] = useState(true);
 
-    const showArticle = (articleId: string) => {
-        setSelectedArticle(articleId);
-    };
+  const guideEntries = Object.entries(guideData);
 
-    const showGuideList = () => {
-        setSelectedArticle(null);
-    };
-    // 글 내부의 링크 클릭을 처리하기 위한 useEffect
-    // useState를 useEffect로 수정합니다.
-    useEffect(() => {
-        const handleShowPage = (event: Event) => {
-            const customEvent = event as CustomEvent;
-            showPage(customEvent.detail);
-        };
+  useEffect(() => {
+    setShowList(true);
+    setSelectedPost(null);
+    onPostSelect(null); 
+  }, []);
 
-        window.addEventListener('showPage', handleShowPage);
-        
-        // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
-        return () => {
-            window.removeEventListener('showPage', handleShowPage);
-        };
-    }, [showPage]);
+  const handlePostClick = (post: GuidePost) => {
+    setSelectedPost(post);
+    setShowList(false);
+    onPostSelect(post); 
+  };
 
-
-    if (selectedArticle && guideData[selectedArticle as keyof typeof guideData]) {
-        const article = guideData[selectedArticle as keyof typeof guideData];
-        return (
-            <div className="tool-card">
-                <button className="back-to-list-btn" onClick={showGuideList}>&#8592; 목록으로</button>
-                <h2 id="article-title">{article.title}</h2>
-                <div id="article-content" className="policy-container" dangerouslySetInnerHTML={{ __html: article.content }} />
-            </div>
-        );
+  const handleBackToList = () => {
+    setShowList(true);
+    setSelectedPost(null);
+    onPostSelect(null); 
+    const guideElement = document.getElementById('guide-section');
+    if (guideElement) {
+        guideElement.scrollIntoView({ behavior: 'smooth' });
     }
+  };
 
-    return (
-        <div className="tool-card">
-            <div id="guide-list-view">
-                <h2>📝 주린이 가이드</h2>
-                <div className="guide-list-container">
-                    <ul className="guide-list">
-                        {Object.keys(guideData).sort((a, b) => Number(b.replace('article-', '')) - Number(a.replace('article-', ''))).map(id => {
-                            const article = guideData[id as keyof typeof guideData];
-                            return (
-                                <li key={id} className="guide-item">
-                                    <a href="#" onClick={(e) => { e.preventDefault(); showArticle(id); }}>{article.title}</a>
-                                    <p>{article.summary}</p>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </div>
-            </div>
+  return (
+    <div className="tool-card" id="guide-section">
+      {showList ? (
+        <>
+          <h2>🐣 주린이 가이드</h2>
+          <div className="guide-intro">
+            <p>투자의 대가들은 어떤 생각을 할까요? 주린이가 꼭 알아야 할 필수 개념들을 알기 쉽게 정리했어요.</p>
+          </div>
+          <div className="guide-list">
+            {guideEntries.map(([key, post]) => (
+              <div key={key} className="guide-list-item" onClick={() => handlePostClick(post)}>
+                <h3>{post.title}</h3>
+                <p>{post.summary}</p>
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="guide-post">
+          <button onClick={handleBackToList} className="back-to-list-btn">← 목록으로 돌아가기</button>
+          <h2>{selectedPost!.title}</h2>
+          <div className="post-content" dangerouslySetInnerHTML={{ __html: selectedPost!.content }} />
+          <button onClick={handleBackToList} className="back-to-list-btn bottom-btn">← 목록으로 돌아가기</button>
         </div>
-    );
+      )}
+    </div>
+  );
 }

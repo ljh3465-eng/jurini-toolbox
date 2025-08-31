@@ -1,41 +1,62 @@
 'use client';
+import { useState } from 'react';
 
-interface NavbarProps {
-    activePage: string;
-    showPage: (pageId: string, isDropdown?: boolean) => void;
+// GuidePost 타입을 정의합니다.
+interface GuidePost {
+  title: string;
+  summary: string;
+  content: string;
 }
 
-export default function Navbar({ activePage, showPage }: NavbarProps) {
-    const dropdownItems = [
-        { id: 'dictionary', name: '주식 용어 사전' },
-        { id: 'useful-sites', name: '유용한 사이트' },
-    ];
+// Navbar 컴포넌트가 받을 props의 타입을 정의합니다.
+interface NavbarProps {
+    showPage: string;
+    setShowPage: (page: string) => void;
+    setSelectedGuidePost: (post: GuidePost | null) => void;
+}
 
+export default function Navbar({ showPage, setShowPage, setSelectedGuidePost }: NavbarProps) {
+    const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+    const handleNavClick = (page: string) => {
+        setShowPage(page);
+        setDropdownOpen(false);
+        if (page !== 'guide') {
+            setSelectedGuidePost(null);
+        }
+    };
+
+    const handleLogoClick = () => {
+        setShowPage('guide'); 
+        setDropdownOpen(false);
+        setSelectedGuidePost(null); 
+    };
+    
     return (
-        <nav className="navbar">
-            <div 
-                className="logo" 
-                onClick={() => showPage('guide')} // 로고 클릭 시 가이드로 이동
-                style={{ cursor: 'pointer' }}
-            >
-                🐣 주린이 툴박스
-            </div>
-            <div className="nav-links">
-                <button className={`nav-button ${activePage === 'avg-calculator' ? 'active' : ''}`} onClick={() => showPage('avg-calculator')}>물타기 계산기</button>
-                <button className={`nav-button ${activePage === 'meme-generator' ? 'active' : ''}`} onClick={() => showPage('meme-generator')}>물타기 짤</button>
-                <button className={`nav-button ${activePage === 'imaginary-rich' ? 'active' : ''}`} onClick={() => showPage('imaginary-rich')}>상상부자 짤</button>
-                {/* ↓↓↓ 2. 기본 활성화 메뉴를 '주린이 가이드'로 변경합니다. ↓↓↓ */}
-                <button className={`nav-button ${activePage === 'guide' ? 'active' : ''}`} onClick={() => showPage('guide')}>주린이 가이드</button>
-                <div className="dropdown">
-                    <button className={`nav-button dropdown-btn ${dropdownItems.some(item => item.id === activePage) || activePage === 'dividend-calculator' ? 'active' : ''}`}>더보기 ▼</button>
-                    <div className="dropdown-content">
-                        <button onClick={() => showPage('dividend-calculator', true)}>배당금 계산기</button>
-                        {dropdownItems.map(item => (
-                            <button key={item.id} onClick={() => showPage(item.id, true)}>{item.name}</button>
-                        ))}
+        <header>
+            <nav className="navbar">
+                <div className="logo" onClick={handleLogoClick} style={{cursor: 'pointer'}}>
+                    <h1>🐣 주린이 툴박스</h1>
+                </div>
+                <div className="nav-links">
+                    <button className={showPage === 'guide' ? 'active' : ''} onClick={() => handleNavClick('guide')}>주린이 가이드</button>
+                    <button className={showPage === 'avg' ? 'active' : ''} onClick={() => handleNavClick('avg')}>물타기 계산기</button>
+                    <button className={showPage === 'meme' ? 'active' : ''} onClick={() => handleNavClick('meme')}>물타기 짤 생성기</button>
+                    <div className="dropdown">
+                        <button className="dropdown-toggle" onClick={() => setDropdownOpen(!isDropdownOpen)}>
+                            더보기 ▼
+                        </button>
+                        {isDropdownOpen && (
+                            <div className="dropdown-menu">
+                                <button className={showPage === 'imagine' ? 'active' : ''} onClick={() => handleNavClick('imagine')}>상상부자 짤 생성기</button>
+                                <button className={showPage === 'dividend' ? 'active' : ''} onClick={() => handleNavClick('dividend')}>배당금 계산기</button>
+                                <button className={showPage === 'dictionary' ? 'active' : ''} onClick={() => handleNavClick('dictionary')}>주식 용어 사전</button>
+                                <button className={showPage === 'sites' ? 'active' : ''} onClick={() => handleNavClick('sites')}>유용한 사이트</button>
+                            </div>
+                        )}
                     </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </header>
     );
 }
