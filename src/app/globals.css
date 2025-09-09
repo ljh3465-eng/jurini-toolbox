@@ -412,31 +412,29 @@ header {
 }
 
 /* Guide styles */
+.guide-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
 .guide-intro {
     text-align: center;
     padding: 1rem 0 2rem;
     border-bottom: 1px solid var(--border-color);
     margin-bottom: 2rem;
 }
-/* ↓↓↓ 주린이 가이드 목록 디자인 수정 ↓↓↓ */
-.guide-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem; /* 카드 사이 간격 */
-}
 .guide-list-item {
-    background-color: #f9f9f9;
-    padding: 1.5rem;
+    background-color: #fff;
     border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 12px;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
-    border-radius: 12px;
 }
 .guide-list-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.07);
 }
-/* ↑↑↑ 주린이 가이드 목록 디자인 수정 ↑↑↑ */
 .guide-list-item h3 {
     margin: 0 0 0.5rem 0;
     font-size: 1.15rem;
