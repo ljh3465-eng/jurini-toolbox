@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Image from 'next/image'; 
 
 export default function AvgCalculator() {
     const [inputs, setInputs] = useState({
@@ -13,6 +14,7 @@ export default function AvgCalculator() {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
         setInputs(prev => ({...prev, [id]: value}));
+        setResult(null); 
     };
 
     const calculate = () => {
@@ -28,7 +30,7 @@ export default function AvgCalculator() {
 
         const totalInvestment = (currentShares * currentPrice) + (additionalShares * additionalPrice);
         const totalShares = currentShares + additionalShares;
-        const finalPrice = Math.round(totalInvestment / totalShares);
+        const finalPrice = totalShares > 0 ? Math.round(totalInvestment / totalShares) : 0;
 
         setResult({
             totalShares: totalShares,
@@ -40,6 +42,7 @@ export default function AvgCalculator() {
     return (
         <div className="tool-card">
             <h2>💧 물타기 계산기</h2>
+            
             <div className="form-group">
                 <label htmlFor="currentShares">현재 보유 주식 수</label>
                 <input type="number" id="currentShares" value={inputs.currentShares} onChange={handleInputChange} placeholder="예: 10" />
@@ -68,7 +71,15 @@ export default function AvgCalculator() {
             )}
 
             <div className="instruction-box">
-                <h4>💡 간단 사용법</h4>
+                <h4>
+                    <Image 
+                        src="/images/chick-surfing.png"
+                        alt="서핑하는 병아리 캐릭터"
+                        width={40}
+                        height={40}
+                    />
+                    간단 사용법
+                </h4>
                 <p>내가 가진 주식의 정보(현재 보유 수량, 평단가)와 추가로 사려는 주식의 정보(추가 매수 수량, 가격)를 입력하고 &apos;계산&apos; 버튼을 누르면, 물타기 후 내 최종 평단가가 얼마가 되는지 자동으로 계산해줘요!</p>
             </div>
         </div>
