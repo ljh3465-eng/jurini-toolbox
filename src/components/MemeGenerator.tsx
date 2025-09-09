@@ -11,7 +11,8 @@ interface Inputs {
 }
 
 export default function MemeGenerator() {
-    const [inputs, setInputs] = = useState<Inputs>({
+    // ↓↓↓ 이 부분의 등호(=)를 하나 삭제했습니다. ↓↓↓
+    const [inputs, setInputs] = useState<Inputs>({
         stockName: '',
         initialPrice: '',
         initialShares: '',
@@ -106,4 +107,3 @@ export default function MemeGenerator() {
         </div>
     );
 }
-
