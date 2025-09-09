@@ -1,5 +1,6 @@
 'use client';
 import { useState, useRef } from 'react';
+import Image from 'next/image'; // Image 컴포넌트를 불러옵니다.
 
 interface Inputs {
     stockName: string;
@@ -10,7 +11,7 @@ interface Inputs {
 }
 
 export default function MemeGenerator() {
-    const [inputs, setInputs] = useState<Inputs>({
+    const [inputs, setInputs] = = useState<Inputs>({
         stockName: '',
         initialPrice: '',
         initialShares: '',
@@ -74,8 +75,7 @@ export default function MemeGenerator() {
             {imageUrl && (
                 <div className="meme-result">
                     <h4>👇 아래 이미지를 꾹 눌러 저장하세요!</h4>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={imageUrl} alt="물타기 결과 짤" style={{ maxWidth: '100%', borderRadius: '8px' }} />
+                    <Image src={imageUrl} alt="물타기 결과 짤" width={320} height={450} style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px' }} />
                     <a href={imageUrl} download="jurini_meme.png" className="download-btn">이미지 다운로드</a>
                 </div>
             )}
@@ -97,8 +97,13 @@ export default function MemeGenerator() {
                         <p>내 평단가는 {initialPriceNum.toLocaleString()}원 인데...</p>
                         <h3>{finalAvgPrice.toLocaleString('en-US', { maximumFractionDigits: 0 })}원이 될 수 있었다...</h3>
                     </div>
+                    {/* ↓↓↓ 짤 안에 서핑 병아리 이미지를 추가합니다. ↓↓↓ */}
+                    <div className="meme-character">
+                        <Image src="/images/chick-surfing.png" alt="서핑하는 주린이" width={50} height={50} />
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
+
