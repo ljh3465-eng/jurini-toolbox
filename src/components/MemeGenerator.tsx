@@ -1,6 +1,6 @@
 'use client';
 import { useState, useRef } from 'react';
-import Image from 'next/image'; // Image 컴포넌트를 불러옵니다.
+import Image from 'next/image';
 
 interface Inputs {
     stockName: string;
@@ -11,7 +11,6 @@ interface Inputs {
 }
 
 export default function MemeGenerator() {
-    // ↓↓↓ 이 부분의 등호(=)를 하나 삭제했습니다. ↓↓↓
     const [inputs, setInputs] = useState<Inputs>({
         stockName: '',
         initialPrice: '',
@@ -94,13 +93,15 @@ export default function MemeGenerator() {
                         <div className="meme-row"><span>물타기 수량</span><strong>{additionalSharesNum.toLocaleString()}주</strong></div>
                         {showAmount && <div className="meme-row"><span>물타기 금액</span><strong>{additionalAmount.toLocaleString()}원</strong></div>}
                     </div>
+                    {/* ↓↓↓ 캐릭터 위치를 footer 안으로 이동시켰습니다. ↓↓↓ */}
                     <div className="meme-footer">
-                        <p>내 평단가는 {initialPriceNum.toLocaleString()}원 인데...</p>
-                        <h3>{finalAvgPrice.toLocaleString('en-US', { maximumFractionDigits: 0 })}원이 될 수 있었다...</h3>
-                    </div>
-                    {/* ↓↓↓ 짤 안에 서핑 병아리 이미지를 추가합니다. ↓↓↓ */}
-                    <div className="meme-character">
-                        <Image src="/images/chick-surfing.png" alt="서핑하는 주린이" width={50} height={50} />
+                        <div>
+                            <p>내 평단가는 {initialPriceNum.toLocaleString()}원 인데...</p>
+                            <h3>{finalAvgPrice.toLocaleString('en-US', { maximumFractionDigits: 0 })}원이 될 수 있었다...</h3>
+                        </div>
+                        <div className="meme-character">
+                            <Image src="/images/chick-surfing.png" alt="서핑하는 주린이" width={50} height={50} />
+                        </div>
                     </div>
                 </div>
             </div>

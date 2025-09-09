@@ -292,10 +292,16 @@ header {
 }
 .meme-footer {
     margin-top: 20px;
-    text-align: center;
     background-color: #fff;
     padding: 15px;
     border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.meme-footer div:first-child {
+    text-align: center;
 }
 .meme-footer p {
     margin: 0 0 5px 0;
@@ -316,14 +322,9 @@ header {
     margin-bottom: 8px;
     text-align: left;
 }
-
 .meme-character {
-    position: absolute;
-    bottom: 10px;
-    right: 15px;
-    opacity: 0.9;
+    flex-shrink: 0; /* 이미지가 찌그러지지 않도록 설정 */
 }
-
 /* === END MEME TEMPLATE STYLES === */
 
 
