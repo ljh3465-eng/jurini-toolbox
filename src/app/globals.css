@@ -251,22 +251,34 @@ header {
     font-weight: 700;
 }
 
-/* === MEME TEMPLATE STYLES (FINAL FIX) === */
+/* === MEME TEMPLATE STYLES (BACKGROUND IMAGE VERSION) === */
 .meme-template {
-    background-color: #FFFBEF;
-    border: 1px solid #ddd;
-    padding: 20px;
     font-family: 'Noto Sans KR', sans-serif;
-    color: #333;
     box-sizing: border-box;
-    position: relative; /* 캐릭터 위치를 잡기 위한 기준점 */
-    padding-bottom: 70px; /* 캐릭터가 들어갈 공간 확보 */
+    position: relative;
+    color: #333; /* 기본 텍스트 색상을 어둡게 유지 */
 }
+
+.water-meme-bg {
+    background-image: url('/images/chick-surfing.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    overflow: hidden; /* 오버레이가 둥근 모서리를 넘지 않도록 설정 */
+}
+
+.meme-overlay {
+    background-color: rgba(255, 255, 255, 0.85); /* 흰색 반투명 레이어 */
+    padding: 20px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
 .meme-header {
     font-size: 14px;
     font-weight: bold;
     margin: 0 0 15px 0;
-    border-bottom: 2px solid #ffc107;
+    border-bottom: 2px solid var(--primary-color);
     padding-bottom: 10px;
     text-align: center;
 }
@@ -285,23 +297,17 @@ header {
     justify-content: space-between;
     font-size: 14px;
     padding: 8px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(0,0,0,0.1); /* 선을 약간 투명하게 */
 }
 .meme-row span {
     color: #555;
 }
 .meme-footer {
     margin-top: 20px;
-    background-color: #fff;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7); /* footer 배경도 약간 투명하게 */
     padding: 15px;
     border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-.meme-footer div:first-child {
-    text-align: center;
 }
 .meme-footer p {
     margin: 0 0 5px 0;
@@ -314,16 +320,13 @@ header {
 }
 .profit { color: #d32f2f; }
 .loss { color: #1976d2; }
-.water-meme .meme-subtitle {
+.water-meme-bg .meme-subtitle {
     font-size: 13px;
     font-weight: bold;
     color: #777;
     margin-top: 20px;
     margin-bottom: 8px;
     text-align: left;
-}
-.meme-character {
-    flex-shrink: 0; /* 이미지가 찌그러지지 않도록 설정 */
 }
 /* === END MEME TEMPLATE STYLES === */
 
@@ -575,3 +578,4 @@ footer {
         grid-template-columns: 1fr; /* 모바일에서는 1열로 표시 */
     }
 }
+

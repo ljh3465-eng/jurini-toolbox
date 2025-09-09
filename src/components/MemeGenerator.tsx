@@ -35,7 +35,12 @@ export default function MemeGenerator() {
         }
         const element = memeRef.current;
         if (element) {
-            const canvas = await html2canvas(element, { useCORS: true, backgroundColor: '#FFFBEF', scale: 2 });
+            const canvas = await html2canvas(element, { 
+                useCORS: true, 
+                // 배경 이미지를 CSS로 처리하므로 JS에서는 배경색을 투명하게 설정
+                backgroundColor: null,
+                scale: 2 
+            });
             setImageUrl(canvas.toDataURL('image/png'));
         }
     };
@@ -79,28 +84,25 @@ export default function MemeGenerator() {
                     <a href={imageUrl} download="jurini_meme.png" className="download-btn">이미지 다운로드</a>
                 </div>
             )}
+            {/* ↓↓↓ 템플릿의 구조는 유지하되, 스타일은 CSS에서 관리합니다. ↓↓↓ */}
             <div style={{ position: 'absolute', left: '-9999px', width: '320px' }}>
-                <div ref={memeRef} className="meme-template water-meme">
-                    <p className="meme-header">&quot;내가 만약 그때 물을 탔더라면...?&quot;</p>
-                    <h2>{inputs.stockName || 'OO전자'}</h2>
-                    <div className="meme-body">
-                        <div className="meme-subtitle">😭 나의 원래 계획</div>
-                        <div className="meme-row"><span>평단가</span><strong>{initialPriceNum.toLocaleString()}원</strong></div>
-                        <div className="meme-row"><span>수량</span><strong>{initialSharesNum.toLocaleString()}주</strong></div>
-                        {showAmount && <div className="meme-row"><span>매수금액</span><strong>{initialAmount.toLocaleString()}원</strong></div>}
-                        <div className="meme-subtitle">😥 놓쳐버린 물타기 기회</div>
-                        <div className="meme-row"><span>물타기 가격</span><strong>{additionalPriceNum.toLocaleString()}원</strong></div>
-                        <div className="meme-row"><span>물타기 수량</span><strong>{additionalSharesNum.toLocaleString()}주</strong></div>
-                        {showAmount && <div className="meme-row"><span>물타기 금액</span><strong>{additionalAmount.toLocaleString()}원</strong></div>}
-                    </div>
-                    {/* ↓↓↓ 캐릭터 위치를 footer 안으로 이동시켰습니다. ↓↓↓ */}
-                    <div className="meme-footer">
-                        <div>
+                <div ref={memeRef} className="meme-template water-meme-bg">
+                    <div className="meme-overlay">
+                        <p className="meme-header">&quot;내가 만약 그때 물을 탔더라면...?&quot;</p>
+                        <h2>{inputs.stockName || 'OO전자'}</h2>
+                        <div className="meme-body">
+                            <div className="meme-subtitle">😭 나의 원래 계획</div>
+                            <div className="meme-row"><span>평단가</span><strong>{initialPriceNum.toLocaleString()}원</strong></div>
+                            <div className="meme-row"><span>수량</span><strong>{initialSharesNum.toLocaleString()}주</strong></div>
+                            {showAmount && <div className="meme-row"><span>매수금액</span><strong>{initialAmount.toLocaleString()}원</strong></div>}
+                            <div className="meme-subtitle">😥 놓쳐버린 물타기 기회</div>
+                            <div className="meme-row"><span>물타기 가격</span><strong>{additionalPriceNum.toLocaleString()}원</strong></div>
+                            <div className="meme-row"><span>물타기 수량</span><strong>{additionalSharesNum.toLocaleString()}주</strong></div>
+                            {showAmount && <div className="meme-row"><span>물타기 금액</span><strong>{additionalAmount.toLocaleString()}원</strong></div>}
+                        </div>
+                        <div className="meme-footer">
                             <p>내 평단가는 {initialPriceNum.toLocaleString()}원 인데...</p>
                             <h3>{finalAvgPrice.toLocaleString('en-US', { maximumFractionDigits: 0 })}원이 될 수 있었다...</h3>
-                        </div>
-                        <div className="meme-character">
-                            <Image src="/images/chick-surfing.png" alt="서핑하는 주린이" width={50} height={50} />
                         </div>
                     </div>
                 </div>
